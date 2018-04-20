@@ -1,0 +1,794 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    .font-blue
+    {
+    		color:rgb(20, 165, 255);
+    }
+     .font-black
+    {
+    		color:black;
+    }
+    .font-gray
+    {
+    		color:gray;
+    }
+      .font-white
+    {
+    		color:white;
+    }
+    .button-blue
+    {	
+    		background-color: rgb(20, 165, 255);
+    		color: white;
+    }
+     .button-red
+    {	
+    		background-color: red;
+    		color: white;
+    }
+    .layout-right
+    {
+    		float: right;
+    }
+    .warp
+    {
+    		width: 100%;
+    }
+    	.td-first
+    	{
+    		border-top: 1px solid rgb(232, 232, 232);
+    		
+    	}
+    	.td
+    	{
+    		border-bottom: 1px solid rgb(232, 232, 232);
+    	}
+    	td
+    	{
+    		padding:10px;
+    	
+    	}
+    	table
+    	{
+    		width: 100%;
+    	}
+    	.toolbar
+    	{
+    			
+    			width: 100%;
+    			padding-top:5px;
+    			padding-bottom:5px;
+    	}
+    	.toolbar-button
+    	{
+    		color: rgb(194, 194, 194);
+    		cursor: pointer;
+    	}
+    	.toolbar-button:hover {
+		color:gray;
+	}
+    </style>
+				<!-- the following links add the CSS and Javascript required for the Leaflet Map -->
+					<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+					integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="crossorigin=""/>
+		
+					<script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
+					integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="crossorigin=""></script>
+ 
+				<!-- the following CSS is used to set the size of the Map -->
+					<style type="text/css">
+					#mapid { height: 500px; }
+					</style>
+				<!-- the following links incorporate the CSS required for custom icon creation -->
+					<link rel="stylesheet" href="./css/ionicons.min.css">
+					<link rel="stylesheet" href="./css/leaflet.awesome-markers.css">
+					<script src="./js/leaflet.awesome-markers.js">
+					</script>			
+  </head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Home</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search">
+              <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
+          </div>
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+            <li class="mdl-menu__item">About</li>
+            <li class="mdl-menu__item">Contact</li>
+            <li class="mdl-menu__item">Legal information</li>
+          </ul>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <img src="images/user.jpg" class="demo-avatar">
+          <div class="demo-avatar-dropdown">
+            <span>hello@example.com</span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons" role="presentation">arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+              <li class="mdl-menu__item">hello@example.com</li>
+              <li class="mdl-menu__item">info@example.com</li>
+              <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+            </ul>
+          </div>
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
+          <a class="mdl-navigation__link" href="" onclick='getLocation();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Track Location</a>
+          <a class="mdl-navigation__link" href="" onclick='getEarthquakes();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Get Earthquakes</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+        </nav>
+      </div>
+      <div class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+		   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+		   <div id="mapid" style="width: 100%; height: 400px;"></div>
+		   
+			
+          </div>
+         <!--   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+          <i class="material-icons font-blue">location_on</i>
+              	<span id="location" class="font-black"></span></div> -->
+           
+           <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+           	<span class="font-gray">点击地图可以添加问题，点击Marker可以查看问题</span>
+          	 <div class="mdl-layout-spacer"></div><div class="toolbar">
+          						<div style="float: right">
+          							<div id="buttons_info" style="display: none">
+          								<span  class="mdl-button button-blue" onclick="editQuestion()">Edit</span>
+	          							<span class="mdl-button button-red" onclick="delQuestion()">Delete</span>
+          							</div>
+          							<div id="buttons_edit" style="display: none">
+	          							<span  class="mdl-button button-blue" onclick="saveQuestion()">Save</span>
+	          							<span class="mdl-button button-red" onclick="cancelEdit()">Cancel</span>
+          							</div>
+          							<div id="buttons_add" style="display: none">
+	          							<span  class="mdl-button button-blue" onclick="addQuestion()">Add</span>
+          							</div>
+          						</div>
+          					</div>
+          <div class="warp"></div>
+          	<table>
+          		<tbody>
+          			<tr>
+          				<td class="td-first">
+          					<div id="question_info" style="display: none">
+          					<div id="question"></div>
+          					<ul >
+          						<li>A:<span id="option1"></span></li>
+          						<li>B:<span id="option2"></span></li>
+          						<li>C:<span id="option3"></span></li>
+          						<li>D:<span id="option4"></span></li>
+          					</ul>
+          					<div>Answer:<select  id="answer" style="width:100px" disabled="disabled">
+          						<option value="1">A</option>
+          						<option value="2">B</option>
+          						<option value="3">C</option>
+          						<option value="4">D</option>
+          					</select></div>
+          					<div>
+          						<i class="material-icons font-blue">location_on</i><span class="font-gray" id="location">lat:0,lng:0</span>
+          					</div>
+          					
+          					</div>
+          					<div id="question_form" style="display: none">
+          					<div>Question:<input type="text" id="f_question" style="width:300px"></div>
+          					<ul>
+          						<li>A:<input type="text" id="f_option1" style="width:200px" ></li>
+          						<li>B:<input type="text" id="f_option2" style="width:200px"></li>
+          						<li>C:<input type="text" id="f_option3" style="width:200px"></li>
+          						<li>D:<input type="text" id="f_option4" style="width:200px"></li>
+          					</ul>
+          					<div>Answer:<select  id="f_answer" style="width:100px">
+          						<option value="1">A</option>
+          						<option value="2">B</option>
+          						<option value="3">C</option>
+          						<option value="4">D</option>
+          					</select></div>
+          					<div>
+          						<i class="material-icons font-blue">location_on</i>
+          						lat:<input type="text" id="lat" style="width:140px" readonly="readonly">
+          						lng:<input type="text" id="lng" style="width:140px"  readonly="readonly">
+          					</div>
+          					</div>
+          					
+          				</td>
+          			</tr>
+          		</tbody>
+          	</table>
+          </div>
+          
+          <!-- <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+            
+          </div> 
+          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+            
+            <div class="demo-separator mdl-cell--1-col"></div> -->
+           <!--  <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+              <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+               
+              </div> 
+              <div class="mdl-card__actions mdl-card--border">
+             
+               <i class="material-icons">location_on</i>
+              	<span id="location" style="color:#ffffff"></span>
+              
+               
+                <div class="mdl-layout-spacer"></div>
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Add Question</a>
+              </div>
+            </div> -->
+            
+          </div> 
+          
+        </div>
+      </div>
+    <script type="text/javascript" src="cordova.js"></script>
+   <script src="./js/index.js"></script> 
+    <script src="./js/appActivity.js"></script> 
+     <script src="./js/uploadData.js"></script> 
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script>
+    		
+    		//点击地图生成的marker
+	    var newmarker=null;
+    		//当前选中的marker
+		var currentSelectMarker=null;
+    		
+    		//当前是否可编辑
+		var eidtable=false;
+		var idindex=999;
+		
+		//pink marker
+		var markerPink = L.AwesomeMarkers.icon({
+					icon: 'play',
+					markerColor: 'pink'});
+		
+		//red marker
+		var markerRed = L.AwesomeMarkers.icon({
+					icon: 'play',
+					markerColor: 'red'});
+		var geojsonFeature = {
+				"type": "Feature",
+				"properties": {
+					"name": "London",
+					"popupContent": "This is where UCL is based"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.134068, 51.524579]
+				}
+			};
+				// and add it to the map
+				//L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+" "+geojsonFeature.properties.popupContent+"<b>");
+				
+				var popup = L.popup();
+				// create an event detector to wait for the user's click event and then use the popup to show them where they clicked
+				// note that you don't need to do any complicated maths to convert screen coordinates to real world coordiantes - the Leaflet API does this for you
+				function onMapClick(e) {
+			
+					//显示添加问题界面
+					showAddQuestion(e.latlng);
+					
+					//移除点击生成的marker
+					if(newmarker!=null)
+						newmarker.remove();
+					
+					
+					if(currentSelectMarker!=null)
+					{
+						//恢复当前选中的marker的颜色为pink
+						currentSelectMarker.setIcon(markerPink);
+						currentSelectMarker=null;
+					}
+					//创建一个红色的marker
+					newmarker=L.marker(e.latlng, {icon:markerRed,draggable:true});
+					
+					//添加到地图上
+					newmarker.addTo(mymap);
+					//给marker添加拖动事件处理方法
+					newmarker.on("drag",function(e){
+						//更新显示当前的经纬度数据
+						updateCurrentLatlng(e.latlng);
+					});
+				}
+				// now add the click event detector to the map
+				mymap.on('click', onMapClick);			
+				
+		
+		/**
+		* 把问题添加到地图上，并生成marker
+		*/
+		function addQuestionToMap(question)
+		{
+			
+			//新建一个marker并添加到地图上
+			var marker=L.marker([question.lat,question.lng], {icon:markerPink,draggable:true}).addTo(mymap);
+			//设置当前marker到问题
+			marker.question=question;
+			//给marker添加拖动处理方法
+			setupMarkerDragEvent(marker);
+			//给marker添加点击处理方法
+			setupMarkerClickEvent(marker);
+			return marker;
+		}
+		/**
+		   编辑问题
+		*/
+		function editQuestion()
+		{
+			
+			if(currentSelectMarker!=null)
+			{
+				//设置当前可编辑
+				eidtable=true;
+				//显示问题编辑界面
+				show("question_form");
+				
+				//隐藏问题信息页面
+				hide("question_info");
+				
+				//隐藏添加界面的按钮
+				hide("buttons_add");
+				//隐藏问题信息页面的按钮
+				hide("buttons_info");
+				
+				//显示问题编辑页面的按钮
+				show("buttons_edit");
+				
+				//获取当前marker的问题
+				var question=currentSelectMarker.question;
+				
+				//显示当前问题对于的经纬度
+				updateCurrentLatlng(question);
+				
+				//显示问题
+				document.getElementById("f_question").value=question.question;
+				
+				//显示选项1
+				document.getElementById("f_option1").value=question.option1;
+				
+				//显示选项2
+				document.getElementById("f_option2").value=question.option2;
+				//显示选项3
+				document.getElementById("f_option3").value=question.option3;
+				//显示选项4
+				document.getElementById("f_option4").value=question.option4;
+				
+				//显示答案
+				document.getElementById("f_answer").value=question.answer;
+			}
+		}
+		/**
+			删除问题
+		*/
+		function  delQuestion()
+		{
+			if(currentSelectMarker!=null)
+			{
+				if(!confirm("你确定要删除吗？"))
+					return;
+			    var datastr="id="+currentSelectMarker.question.id;
+			    postData("delquestion",datastr,function(data){
+					if(data=="ok")
+					{
+						//从地图中移除marker
+						currentSelectMarker.remove();
+						//设置当前不可编辑
+						eidtable=false;
+						
+						//隐藏问题编辑界面
+						hide("question_form");
+						//隐藏问题信息界面
+						hide("question_info");
+						//隐藏问题添加界面的按钮
+						hide("buttons_add");
+						//隐藏问题信息界面的按钮
+						hide("buttons_info");
+						//隐藏问题编辑界面的按钮
+						hide("buttons_edit");
+					}
+					else
+						alert("fail to delete question");
+				});
+				
+			}
+		}
+		/**
+			显示指定id的元素
+		*/
+		function show(id)
+		{
+			//根据id获取元素
+			var elm=document.getElementById(id);
+			if(elm!=null)
+				elm.style.display="block";//显示元素
+		}
+		/**
+			隐藏指定id的元素
+		*/
+		function hide(id)
+		{
+			//根据id获取元素
+			var elm=document.getElementById(id);
+			if(elm!=null)
+				elm.style.display="none";//隐藏元素
+		}
+		/**
+			显示添加问题界面
+		*/
+		function showAddQuestion(latlng)
+		{
+			//取消编辑
+			cancelEdit();
+			//显示当前添加问题的地理未知
+			updateCurrentLatlng(latlng);
+			
+			//显示添加问题界面
+			show("question_form");
+			//隐藏问题信息界面
+			hide("question_info");
+			//显示问题添加界面的按钮
+			show("buttons_add");
+			//隐藏问题信息页面的按钮
+			hide("buttons_info");
+			//隐藏问题编辑界面的按钮
+			hide("buttons_edit");
+			
+			//清空问题输入框内容
+			document.getElementById("f_question").value="";
+			document.getElementById("f_option1").value="";
+			document.getElementById("f_option2").value="";
+			document.getElementById("f_option3").value="";
+			document.getElementById("f_option4").value="";
+			document.getElementById("f_answer").value="";
+		}
+		/**
+			取消编辑
+		**/
+		function cancelEdit()
+		{
+			if(currentSelectMarker!=null)
+			{
+				//设置当前不可编辑
+				eidtable=false;
+				//隐藏问题编辑界面
+				hide("question_form");
+				//显示问题信息界面
+				show("question_info");
+				//隐藏问题添加界面按钮
+				hide("buttons_add");
+				//显示问题信息界面按钮
+				show("buttons_info");
+				//隐藏问题编辑界面按钮
+				hide("buttons_edit");
+				//获取当前marker的问题信息
+				var question=currentSelectMarker.question;
+				//恢复当前marker的位置为原来的位置
+				currentSelectMarker.setLatLng(L.latLng(question.lat, question.lng));
+				
+			}
+		}
+		/**
+			添加问题
+		*/
+		function addQuestion()
+		{
+			//获取问题
+			var question=document.getElementById("f_question").value;
+			//获取选项1
+			var option1=document.getElementById("f_option1").value;
+			//获取选项2
+			var option2=document.getElementById("f_option2").value;
+			//获取选项3
+			var option3=document.getElementById("f_option3").value;
+			//获取选项4
+			var option4=document.getElementById("f_option4").value;
+			
+			//获取正确答案
+			var answer=document.getElementById("f_answer").value;
+			
+			//获取地理位置
+			var lat=document.getElementById("lat").value;
+			var lng=document.getElementById("lng").value;
+			
+			//判断输入的内容是否完整
+			if(question.length==0
+					||option1.length==0
+					||option2.length==0
+					||option3.length==0
+					||option4.length==0
+					||answer.length==0
+					||lat.length==0
+					||lng.length==0
+					)
+			{
+				//输入不完整提示补充完整信息
+				alert("请填写完整信息");
+				return;
+			}
+			
+			//保存问题到服务器
+			var datastr="question="+question+"&option1="+option1+"&option2="+option2+"&option3="+option3+"&option4="+option4
+				+"&answer="+answer+"&lat="+lat+"&lng="+lng;
+			postData("addquestion",datastr,function(data){
+				if(data=="ok")
+				{
+					alert("add question success");
+					//reload page
+					window.location.reload();
+				}
+				else
+					alert("fail to add question");
+			});
+			
+		}
+		/**
+			保存问题
+		*/
+		function saveQuestion()
+		{
+			//获取问题
+			var question=document.getElementById("f_question").value;
+			//获取选项1
+			var option1=document.getElementById("f_option1").value;
+			//获取选项2
+			var option2=document.getElementById("f_option2").value;
+			//获取选项3
+			var option3=document.getElementById("f_option3").value;
+			//获取选项4
+			var option4=document.getElementById("f_option4").value;
+			//获取正确答案
+			var answer=document.getElementById("f_answer").value;
+			
+			//获取地理位置
+			var lat=document.getElementById("lat").value;
+			var lng=document.getElementById("lng").value;
+			
+			//判断输入的内容是否完整
+			if(question.length==0
+					||option1.length==0
+					||option2.length==0
+					||option3.length==0
+					||option4.length==0
+					||answer.length==0
+					||lat.length==0
+					||lng.length==0
+					)
+			{
+				//输入不完整提示补充完整信息
+				alert("请填写完整信息");
+				return;
+			}
+			//设置当前不编辑
+			eidtable=false;
+			//更新当前marker的问题信息
+			currentSelectMarker.question.question=question;
+			currentSelectMarker.question.option1=option1;
+			currentSelectMarker.question.option2=option2;
+			currentSelectMarker.question.option3=option3;
+			currentSelectMarker.question.option4=option4;
+			currentSelectMarker.question.answer=answer;
+			currentSelectMarker.question.lat=lat;
+			currentSelectMarker.question.lng=lng;
+		
+			
+			//保存问题到服务器
+			var datastr="id="+currentSelectMarker.question.id+"&question="+question+"&option1="+option1+"&option2="+option2+"&option3="+option3+"&option4="+option4
+				+"&answer="+answer+"&lat="+lat+"&lng="+lng;
+			postData("updatequestion",datastr,function(data){
+				if(data=="ok")
+				{
+					alert("update question success");
+					//显示当前marker的问题信息
+					showQuestionDetail(currentSelectMarker.question);
+				}
+				else
+					alert("fail to update question");
+			});
+			
+			
+		}
+		/**
+			更新显示当前地理位置
+		*/
+		function updateCurrentLatlng(latlng)
+		{
+			//获取lat输入框
+			var lat=document.getElementById("lat");
+			//设置lat输入框的值
+			lat.value=latlng.lat;
+			//获取lng输入框
+			var lng=document.getElementById("lng");
+			//设置lng输入框的值
+			lng.value=latlng.lng;
+		}
+		/**
+		  显示问题信息
+		*/
+		function showQuestionDetail(question)
+		{
+			//隐藏问题编辑界面
+			hide("question_form");
+			//显示问题信息界面
+			show("question_info");
+			//隐藏问题添加界面的按钮
+			hide("buttons_add");
+			//显示问题信息界面的按钮
+			show("buttons_info");
+			//隐藏问题编辑界面的按钮
+			hide("buttons_edit");
+			
+			var question_div=document.getElementById("question");
+			//显示问题
+			question_div.innerHTML=question.question;
+			
+			for(var i=1 ;i<5;i++)
+			{
+				//获取问题选项
+				var op=question["option"+i];
+				//显示选项内容
+				document.getElementById("option"+i).innerHTML=op;
+			}
+			//显示答案
+			document.getElementById("answer").value=question.answer;
+			var lc=document.getElementById("location");
+			//显示地理位置
+			lc.innerHTML="lat:"+question.lat+",lng:"+question.lng;
+		}
+		/**
+			选中marker
+		*/
+		function selectMarker(marker)
+		{
+			//当前选中的和要选中的是同一个
+			if(currentSelectMarker==marker)
+				return;
+			//取消编辑
+			cancelEdit();
+			//设置当前不可编辑
+			eidtable=false;
+			//移除点击地图生成的marker
+			if(newmarker!=null)
+			{
+				newmarker.remove();
+				newmarker=null;
+			}
+		
+			if(currentSelectMarker!=null)
+			{
+				//恢复上次选中的marker的颜色为pink
+				currentSelectMarker.setIcon(markerPink);
+			}
+			//设置当选中的marker
+			currentSelectMarker=marker;
+			//设置选中的marker的颜色为red
+			marker.setIcon(markerRed);
+			//显示marker对应的问题
+			showQuestionDetail(marker.question);
+		}
+		/**
+			设置marker的拖动事件处理方法
+		*/
+		function setupMarkerDragEvent(marker)
+		{
+			marker.on("drag",function(e){
+					//更新地理位置
+					updateCurrentLatlng(e.latlng);
+				});
+			marker.on("dragstart",function(e){
+					//如果当前拖动的marker不是当前选中的marker或者当前不可编辑，则禁止拖动
+					if(currentSelectMarker!=marker||!eidtable)
+						e.stopPropagation();//停止事件传递，即可禁止拖动
+				});
+		}
+		/**
+			设置marker的点击事件处理方法
+		*/
+		function setupMarkerClickEvent(marker)
+		{
+			marker.on('click',function(e){
+				//选中点击的marker
+				selectMarker(marker);
+			});
+		}
+		/**
+		载入数据
+		*/
+		function loadData()
+		{
+			getData("getallquestions",function(data){
+				var questions=JSON.parse(data);
+				for(var i in questions)
+				{
+					var question=questions[i];
+					addQuestionToMap(question);
+				}
+			});
+		}
+		//获取当前位置
+		getLocation();
+		loadData();
+	</script>
+  </body>
+</html>
