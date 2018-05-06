@@ -4,8 +4,8 @@
     <description>
         Question Setting
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="ucesbz0@ucl.ac.uk" href="https://www.ucl.ac.uk">
+        ucesbz0@ucl
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />

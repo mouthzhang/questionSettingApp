@@ -21,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Material Design Lite</title>
+    <title>Question Setting</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -135,8 +135,9 @@
  
 				<!-- the following CSS is used to set the size of the Map -->
 					<style type="text/css">
-					#mapid { height: 500px; }
+					#mapid { height: 800px; }
 					</style>
+					
 				<!-- the following links incorporate the CSS required for custom icon creation -->
 					<link rel="stylesheet" href="./css/ionicons.min.css">
 					<link rel="stylesheet" href="./css/leaflet.awesome-markers.css">
@@ -172,29 +173,22 @@
         <header class="demo-drawer-header">
           <img src="images/user.jpg" class="demo-avatar">
           <div class="demo-avatar-dropdown">
-            <span>hello@example.com</span>
+            <span>ucesbz0@ucl.ac.uk</span>
             <div class="mdl-layout-spacer"></div>
             <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
               <i class="material-icons" role="presentation">arrow_drop_down</i>
               <span class="visuallyhidden">Accounts</span>
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-              <li class="mdl-menu__item">hello@example.com</li>
-              <li class="mdl-menu__item">info@example.com</li>
+              <li class="mdl-menu__item">ucesbz0@ucl.ac.uk</li>
               <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
             </ul>
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
-          <a class="mdl-navigation__link" href="" onclick='getLocation();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Track Location</a>
-          <a class="mdl-navigation__link" href="" onclick='getEarthquakes();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Get Earthquakes</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
+         <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href="https://moodle.ucl.ac.uk/mod/forum/view.php?id=2259367"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
+          <a class="mdl-navigation__link" href="updates.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
@@ -202,16 +196,11 @@
       <div class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
 		   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-		   <div id="mapid" style="width: 100%; height: 400px;"></div>
-		   
-			
+		   <div id="mapid" style="width: 100%; height: 500px;"></div>
           </div>
-         <!--   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-          <i class="material-icons font-blue">location_on</i>
-              	<span id="location" class="font-black"></span></div> -->
-           
+                    
            <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-           	<span class="font-gray">点击地图可以添加问题，点击Marker可以查看问题</span>
+           	<span class="font-gray">Click map to add questions, Click marker to view submitted questions</span>
           	 <div class="mdl-layout-spacer"></div><div class="toolbar">
           						<div style="float: right">
           							<div id="buttons_info" style="display: none">
@@ -278,27 +267,7 @@
           	</table>
           </div>
           
-          <!-- <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-            
-          </div> 
-          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-            
-            <div class="demo-separator mdl-cell--1-col"></div> -->
-           <!--  <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-              <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-               
-              </div> 
-              <div class="mdl-card__actions mdl-card--border">
-             
-               <i class="material-icons">location_on</i>
-              	<span id="location" style="color:#ffffff"></span>
-              
-               
-                <div class="mdl-layout-spacer"></div>
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Add Question</a>
-              </div>
-            </div> -->
-            
+                      
           </div> 
           
         </div>
@@ -310,12 +279,12 @@
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script>
     		
-    		//点击地图生成的marker
+    		//new marker by cliking map
 	    var newmarker=null;
-    		//当前选中的marker
+    		//current choosing marker
 		var currentSelectMarker=null;
     		
-    		//当前是否可编辑
+    		//current marker editable
 		var eidtable=false;
 		var idindex=999;
 		
@@ -340,35 +309,34 @@
 				}
 			};
 				// and add it to the map
-				//L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+" "+geojsonFeature.properties.popupContent+"<b>");
 				
 				var popup = L.popup();
 				// create an event detector to wait for the user's click event and then use the popup to show them where they clicked
 				// note that you don't need to do any complicated maths to convert screen coordinates to real world coordiantes - the Leaflet API does this for you
 				function onMapClick(e) {
 			
-					//显示添加问题界面
+					//show question setting interface
 					showAddQuestion(e.latlng);
 					
-					//移除点击生成的marker
+					//remove marker
 					if(newmarker!=null)
 						newmarker.remove();
 					
 					
 					if(currentSelectMarker!=null)
 					{
-						//恢复当前选中的marker的颜色为pink
+						//restore the selecting marker to pink
 						currentSelectMarker.setIcon(markerPink);
 						currentSelectMarker=null;
 					}
-					//创建一个红色的marker
+					//create a red marker
 					newmarker=L.marker(e.latlng, {icon:markerRed,draggable:true});
 					
-					//添加到地图上
+					//add to the map
 					newmarker.addTo(mymap);
-					//给marker添加拖动事件处理方法
+					//marker dragging ability
 					newmarker.on("drag",function(e){
-						//更新显示当前的经纬度数据
+						//update with new marker coord
 						updateCurrentLatlng(e.latlng);
 					});
 				}
