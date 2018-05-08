@@ -150,23 +150,7 @@
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Home</span>
           <div class="mdl-layout-spacer"></div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-              <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" id="search">
-              <label class="mdl-textfield__label" for="search">Enter your query...</label>
-            </div>
-          </div>
-          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-            <i class="material-icons">more_vert</i>
-          </button>
-          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-            <li class="mdl-menu__item">About</li>
-            <li class="mdl-menu__item">Contact</li>
-            <li class="mdl-menu__item">Legal information</li>
-          </ul>
+          
         </div>
       </header>
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
@@ -187,8 +171,8 @@
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
          <a class="mdl-navigation__link" href="#"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href="https://moodle.ucl.ac.uk/mod/forum/view.php?id=2259367"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
-          <a class="mdl-navigation__link" href="updates.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
+          <a class="mdl-navigation__link" href="https://moodle.ucl.ac.uk/mod/forum/view.php?id=2259367"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forum</a>
+          <a class="mdl-navigation__link" href="user guide.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>User Guide</a>
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
@@ -200,7 +184,7 @@
           </div>
                     
            <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-           	<span class="font-gray">Click map to add questions, Click marker to view submitted questions</span>
+           	<span class="font-gray">Click map to add questions. Click marker to view submitted questions.</span>
           	 <div class="mdl-layout-spacer"></div><div class="toolbar">
           						<div style="float: right">
           							<div id="buttons_info" style="display: none">
@@ -285,7 +269,7 @@
 		var currentSelectMarker=null;
     		
     		//current marker editable
-		var eidtable=false;
+		var editable=false;
 		var idindex=999;
 		
 		//pink marker
@@ -305,7 +289,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.134068, 51.524579]
+				"coordinates": [51.524579, -0.134068]
 				}
 			};
 				// and add it to the map
@@ -345,95 +329,95 @@
 				
 		
 		/**
-		* 把问题添加到地图上，并生成marker
+		* Add question to map and create marker
 		*/
 		function addQuestionToMap(question)
 		{
 			
-			//新建一个marker并添加到地图上
+			//creat a new marker and add it to map
 			var marker=L.marker([question.lat,question.lng], {icon:markerPink,draggable:true}).addTo(mymap);
-			//设置当前marker到问题
+			//setting question for current marker
 			marker.question=question;
-			//给marker添加拖动处理方法
+			//marker able to drag
 			setupMarkerDragEvent(marker);
-			//给marker添加点击处理方法
+			//click event for marker
 			setupMarkerClickEvent(marker);
 			return marker;
 		}
 		/**
-		   编辑问题
+		   edit question
 		*/
 		function editQuestion()
 		{
 			
 			if(currentSelectMarker!=null)
 			{
-				//设置当前可编辑
-				eidtable=true;
-				//显示问题编辑界面
+				//set question editableable
+				editable=true;
+				//show question setting interface
 				show("question_form");
 				
-				//隐藏问题信息页面
+				//hide question information
 				hide("question_info");
 				
-				//隐藏添加界面的按钮
+				//hide add button
 				hide("buttons_add");
-				//隐藏问题信息页面的按钮
+				//hide question info button
 				hide("buttons_info");
 				
-				//显示问题编辑页面的按钮
+				//show question edit button
 				show("buttons_edit");
 				
-				//获取当前marker的问题
+				//get selected marker question 
 				var question=currentSelectMarker.question;
 				
-				//显示当前问题对于的经纬度
+				//show current question coord 
 				updateCurrentLatlng(question);
 				
-				//显示问题
+				//show question
 				document.getElementById("f_question").value=question.question;
 				
-				//显示选项1
+				//show opt 1
 				document.getElementById("f_option1").value=question.option1;
 				
-				//显示选项2
+				//show opt 2
 				document.getElementById("f_option2").value=question.option2;
-				//显示选项3
+				//show opt 3
 				document.getElementById("f_option3").value=question.option3;
-				//显示选项4
+				//show opt 4
 				document.getElementById("f_option4").value=question.option4;
 				
-				//显示答案
+				//show answer
 				document.getElementById("f_answer").value=question.answer;
 			}
 		}
 		/**
-			删除问题
+			deleting question
 		*/
 		function  delQuestion()
 		{
 			if(currentSelectMarker!=null)
 			{
-				if(!confirm("你确定要删除吗？"))
+				if(!confirm("Do you want to delete the question?"))
 					return;
 			    var datastr="id="+currentSelectMarker.question.id;
 			    postData("delquestion",datastr,function(data){
 					if(data=="ok")
 					{
-						//从地图中移除marker
+						//remove marker from map
 						currentSelectMarker.remove();
-						//设置当前不可编辑
-						eidtable=false;
+						//make it uneditable
+						editable=false;
 						
-						//隐藏问题编辑界面
+						//hide question editing face
 						hide("question_form");
-						//隐藏问题信息界面
+						//hide question info face
 						hide("question_info");
-						//隐藏问题添加界面的按钮
+						//hide add button
 						hide("buttons_add");
-						//隐藏问题信息界面的按钮
+						//hide info button
 						hide("buttons_info");
-						//隐藏问题编辑界面的按钮
+						//hide edit button
 						hide("buttons_edit");
 					}
 					else
@@ -443,47 +427,47 @@
 			}
 		}
 		/**
-			显示指定id的元素
+			show id element
 		*/
 		function show(id)
 		{
-			//根据id获取元素
+			//get element by id
 			var elm=document.getElementById(id);
 			if(elm!=null)
-				elm.style.display="block";//显示元素
+				elm.style.display="block";//show element
 		}
 		/**
-			隐藏指定id的元素
+			hide id element
 		*/
 		function hide(id)
 		{
-			//根据id获取元素
+			//get element by id
 			var elm=document.getElementById(id);
 			if(elm!=null)
-				elm.style.display="none";//隐藏元素
+				elm.style.display="none";//hide element
 		}
 		/**
-			显示添加问题界面
+			show question adding face
 		*/
 		function showAddQuestion(latlng)
 		{
-			//取消编辑
+			//cancel edit
 			cancelEdit();
-			//显示当前添加问题的地理未知
+			//show current question coord 
 			updateCurrentLatlng(latlng);
 			
-			//显示添加问题界面
+			//show question setting interface
 			show("question_form");
-			//隐藏问题信息界面
+			//hide question info face
 			hide("question_info");
-			//显示问题添加界面的按钮
+			//show question adding button
 			show("buttons_add");
-			//隐藏问题信息页面的按钮
+			//hide question info button
 			hide("buttons_info");
-			//隐藏问题编辑界面的按钮
+			//hide question editing button
 			hide("buttons_edit");
 			
-			//清空问题输入框内容
+			//clear all inputs
 			document.getElementById("f_question").value="";
 			document.getElementById("f_option1").value="";
 			document.getElementById("f_option2").value="";
@@ -492,55 +476,55 @@
 			document.getElementById("f_answer").value="";
 		}
 		/**
-			取消编辑
+			cancel edit
 		**/
 		function cancelEdit()
 		{
 			if(currentSelectMarker!=null)
 			{
-				//设置当前不可编辑
-				eidtable=false;
-				//隐藏问题编辑界面
+				//set current marker uneditable
+				editable=false;
+				//hide question form
 				hide("question_form");
-				//显示问题信息界面
+				//show question info button
 				show("question_info");
-				//隐藏问题添加界面按钮
+				//hide question adding button
 				hide("buttons_add");
-				//显示问题信息界面按钮
+				//show question info button
 				show("buttons_info");
-				//隐藏问题编辑界面按钮
+				//hide question edit button
 				hide("buttons_edit");
-				//获取当前marker的问题信息
+				//get original question info
 				var question=currentSelectMarker.question;
-				//恢复当前marker的位置为原来的位置
+				//restore the marker to previous coord
 				currentSelectMarker.setLatLng(L.latLng(question.lat, question.lng));
 				
 			}
 		}
 		/**
-			添加问题
+			add question
 		*/
 		function addQuestion()
 		{
-			//获取问题
+			//get question element
 			var question=document.getElementById("f_question").value;
-			//获取选项1
+			//get opt 1
 			var option1=document.getElementById("f_option1").value;
-			//获取选项2
+			//get opt 2
 			var option2=document.getElementById("f_option2").value;
-			//获取选项3
+			//get opt 3
 			var option3=document.getElementById("f_option3").value;
-			//获取选项4
+			//get opt 4
 			var option4=document.getElementById("f_option4").value;
 			
-			//获取正确答案
+			//get the correct answer
 			var answer=document.getElementById("f_answer").value;
 			
-			//获取地理位置
+			//get the coord
 			var lat=document.getElementById("lat").value;
 			var lng=document.getElementById("lng").value;
 			
-			//判断输入的内容是否完整
+			//determine if all blanks have been filled
 			if(question.length==0
 					||option1.length==0
 					||option2.length==0
@@ -551,49 +535,49 @@
 					||lng.length==0
 					)
 			{
-				//输入不完整提示补充完整信息
-				alert("请填写完整信息");
+				//alert if insufficinet info
+				alert("Please fill all information");
 				return;
 			}
 			
-			//保存问题到服务器
+			//upload to server
 			var datastr="question="+question+"&option1="+option1+"&option2="+option2+"&option3="+option3+"&option4="+option4
 				+"&answer="+answer+"&lat="+lat+"&lng="+lng;
 			postData("addquestion",datastr,function(data){
 				if(data=="ok")
 				{
-					alert("add question success");
+					alert("Adding question successful");
 					//reload page
 					window.location.reload();
 				}
 				else
-					alert("fail to add question");
+					alert("Fail to add question");
 			});
 			
 		}
 		/**
-			保存问题
+			save question
 		*/
 		function saveQuestion()
 		{
-			//获取问题
+			//get question element
 			var question=document.getElementById("f_question").value;
-			//获取选项1
+			//get opt 1
 			var option1=document.getElementById("f_option1").value;
-			//获取选项2
+			//get opt 2
 			var option2=document.getElementById("f_option2").value;
-			//获取选项3
+			//get opt 3
 			var option3=document.getElementById("f_option3").value;
-			//获取选项4
+			//get opt 4
 			var option4=document.getElementById("f_option4").value;
-			//获取正确答案
+			//get correct answer
 			var answer=document.getElementById("f_answer").value;
 			
-			//获取地理位置
+			//get the coord
 			var lat=document.getElementById("lat").value;
 			var lng=document.getElementById("lng").value;
 			
-			//判断输入的内容是否完整
+			//determine if all blanks have been filled
 			if(question.length==0
 					||option1.length==0
 					||option2.length==0
@@ -604,13 +588,13 @@
 					||lng.length==0
 					)
 			{
-				//输入不完整提示补充完整信息
-				alert("请填写完整信息");
+				//alert if insufficinet info
+				alert("Please fill all information");
 				return;
 			}
-			//设置当前不编辑
-			eidtable=false;
-			//更新当前marker的问题信息
+			//uneditable
+			editable=false;
+			//update current question marker info
 			currentSelectMarker.question.question=question;
 			currentSelectMarker.question.option1=option1;
 			currentSelectMarker.question.option2=option2;
@@ -621,14 +605,14 @@
 			currentSelectMarker.question.lng=lng;
 		
 			
-			//保存问题到服务器
+			//upload to server
 			var datastr="id="+currentSelectMarker.question.id+"&question="+question+"&option1="+option1+"&option2="+option2+"&option3="+option3+"&option4="+option4
 				+"&answer="+answer+"&lat="+lat+"&lng="+lng;
 			postData("updatequestion",datastr,function(data){
 				if(data=="ok")
 				{
-					alert("update question success");
-					//显示当前marker的问题信息
+					alert("update question successful");
+					//show current selected marker question info
 					showQuestionDetail(currentSelectMarker.question);
 				}
 				else
@@ -638,65 +622,65 @@
 			
 		}
 		/**
-			更新显示当前地理位置
+			update current coord
 		*/
 		function updateCurrentLatlng(latlng)
 		{
-			//获取lat输入框
+			//get "lat" title
 			var lat=document.getElementById("lat");
-			//设置lat输入框的值
+			//get "lat" value
 			lat.value=latlng.lat;
-			//获取lng输入框
+			//get "lng" title
 			var lng=document.getElementById("lng");
-			//设置lng输入框的值
+			//get "lng" value
 			lng.value=latlng.lng;
 		}
 		/**
-		  显示问题信息
+		  show the question info
 		*/
 		function showQuestionDetail(question)
 		{
-			//隐藏问题编辑界面
+			//hide question form
 			hide("question_form");
-			//显示问题信息界面
+			//show question info page
 			show("question_info");
-			//隐藏问题添加界面的按钮
+			//hide adding question button
 			hide("buttons_add");
-			//显示问题信息界面的按钮
+			//show question info button
 			show("buttons_info");
-			//隐藏问题编辑界面的按钮
+			//hide question editing button
 			hide("buttons_edit");
 			
 			var question_div=document.getElementById("question");
-			//显示问题
+			//show the question
 			question_div.innerHTML=question.question;
 			
 			for(var i=1 ;i<5;i++)
 			{
-				//获取问题选项
+				//get all the options	
 				var op=question["option"+i];
-				//显示选项内容
+				//show the options info
 				document.getElementById("option"+i).innerHTML=op;
 			}
-			//显示答案
+			//get the question answer
 			document.getElementById("answer").value=question.answer;
 			var lc=document.getElementById("location");
-			//显示地理位置
+			//show the coord for the question
 			lc.innerHTML="lat:"+question.lat+",lng:"+question.lng;
 		}
 		/**
-			选中marker
+			select marker
 		*/
 		function selectMarker(marker)
 		{
-			//当前选中的和要选中的是同一个
+			//if re-select the same marker
 			if(currentSelectMarker==marker)
 				return;
-			//取消编辑
+			//cancel edit
 			cancelEdit();
-			//设置当前不可编辑
-			eidtable=false;
-			//移除点击地图生成的marker
+			//set it to uneditable
+			editable=false;
+			//remove marker by previous click on the map
 			if(newmarker!=null)
 			{
 				newmarker.remove();
@@ -705,43 +689,43 @@
 		
 			if(currentSelectMarker!=null)
 			{
-				//恢复上次选中的marker的颜色为pink
+				//restore the unselected marker to pink
 				currentSelectMarker.setIcon(markerPink);
 			}
-			//设置当选中的marker
+			//make it the selected marker
 			currentSelectMarker=marker;
-			//设置选中的marker的颜色为red
+			//change it to red marker
 			marker.setIcon(markerRed);
-			//显示marker对应的问题
+			//show the marker correspond question
 			showQuestionDetail(marker.question);
 		}
 		/**
-			设置marker的拖动事件处理方法
+			marker draging 
 		*/
 		function setupMarkerDragEvent(marker)
 		{
 			marker.on("drag",function(e){
-					//更新地理位置
+					//update the coord
 					updateCurrentLatlng(e.latlng);
 				});
 			marker.on("dragstart",function(e){
-					//如果当前拖动的marker不是当前选中的marker或者当前不可编辑，则禁止拖动
-					if(currentSelectMarker!=marker||!eidtable)
-						e.stopPropagation();//停止事件传递，即可禁止拖动
+					//if the marker is uneditable or not the previous selected, then it cannot be dragged
+					if(currentSelectMarker!=marker||!editable)
+						e.stopPropagation();//stop the whole action
 				});
 		}
 		/**
-			设置marker的点击事件处理方法
+			marker respond to clicking
 		*/
 		function setupMarkerClickEvent(marker)
 		{
 			marker.on('click',function(e){
-				//选中点击的marker
+				//select clicked marker
 				selectMarker(marker);
 			});
 		}
 		/**
-		载入数据
+			load data
 		*/
 		function loadData()
 		{
@@ -754,7 +738,7 @@
 				}
 			});
 		}
-		//获取当前位置
+		//get location
 		getLocation();
 		loadData();
 	</script>
